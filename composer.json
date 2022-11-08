@@ -1,0 +1,140 @@
+{
+    "name": "cyberwoven/drupal-project",
+    "description": "Project template for Drupal projects with composer",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
+        "cyberwoven/cyberwoven_suite": "^1.0",
+        "drupal/address": "^1.8",
+        "drupal/admin_toolbar": "^2.3",
+        "drupal/adminimal_admin_toolbar": "^1.11",
+        "drupal/adminimal_theme": "^1.6",
+        "drupal/adv_varnish": "^4.0",
+        "drupal/allowed_formats": "^1.3",
+        "drupal/anchor_link": "^2.4",
+        "drupal/auto_entitylabel": "^3.0@beta",
+        "drupal/better_exposed_filters": "^5.0@beta",
+        "drupal/bg_image_formatter": "^1.14",
+        "drupal/ckeditor_accordion": "^1.3",
+        "drupal/core-composer-scaffold": "^9.3",
+        "drupal/core-recommended": "^9.3",
+        "drupal/crop": "^2.1",
+        "drupal/easy_breadcrumb": "^2.0",
+        "drupal/editor_advanced_link": "^1.8",
+        "drupal/environment_indicator": "^4.0",
+        "drupal/field_group": "^3.1",
+        "drupal/focal_point": "^1.5",
+        "drupal/honeypot": "^2.0",
+        "drupal/image_widget_crop": "^2.3",
+        "drupal/imce": "^2.2",
+        "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/jquery_ui_accordion": "^1.1",
+        "drupal/link_attributes": "^1.10",
+        "drupal/linkit": "^6.0.0@beta",
+        "drupal/mailchimp": "^1.11",
+        "drupal/masquerade": "^2.0@beta",
+        "drupal/menu_block": "^1.6",
+        "drupal/menu_breadcrumb": "^1.13",
+        "drupal/menu_item_extras": "^2.16",
+        "drupal/metatag": "^1.13",
+        "drupal/module_filter": "^3.1",
+        "drupal/node_view_permissions": "^1.4",
+        "drupal/paragraphs": "^1.12",
+        "drupal/path_redirect_import": "^1.0@beta",
+        "drupal/pathauto": "^1.8",
+        "drupal/rabbit_hole": "^1.0@beta",
+        "drupal/rebuild_cache_access": "^1.7",
+        "drupal/redirect": "^1.6",
+        "drupal/reroute_email": "^2.0",
+        "drupal/responsive_bg_image_formatter": "^1.15",
+        "drupal/robotstxt": "^1.4",
+        "drupal/scheduler": "^1.4",
+        "drupal/scheduler_content_moderation_integration": "^1.3",
+        "drupal/search_api": "^1.17",
+        "drupal/search_api_solr": "^4.1",
+        "drupal/smart_date": "^3.4",
+        "drupal/smart_trim": "^2.0",
+        "drupal/smtp": "^1.0@RC",
+        "drupal/svg_image": "^1.15",
+        "drupal/token_filter": "^1.2",
+        "drupal/tvi": "^1.0@RC",
+        "drupal/twig_field_value": "^2.0",
+        "drupal/twig_tweak": "^2.6",
+        "drupal/video_embed_field": "^2.4",
+        "drupal/twig_vardumper": "^3.0",
+        "drupal/unpublished_404": "^2.0",
+        "drupal/upgrade_status": "^3.11",
+        "drupal/webform": "^6.0",
+        "drupal/xmlsitemap": "^1.0",
+        "drush/drush": "^10.3",
+        "webmozart/path-util": "^2.3",
+        "wikimedia/composer-merge-plugin": "^2.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "wikimedia/composer-merge-plugin": true
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "cp -Rf pub/libraries/ckeditor.fakeobjects pub/libraries/fakeobjects"
+        ],
+        "post-update-cmd": [
+            "cp -Rf pub/libraries/ckeditor.fakeobjects pub/libraries/fakeobjects"
+        ]
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "pub/modules/contrib/webform/composer.libraries.json"
+            ]
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "pub/"
+            },
+            "file-mapping": {
+                "[web-root]/robots.txt": false
+            }
+        },
+        "installer-paths": {
+            "pub/core": ["type:drupal-core"],
+            "pub/libraries/{$name}": ["type:drupal-library"],
+            "pub/modules/contrib/{$name}": ["type:drupal-module"],
+            "pub/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "pub/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "pub/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "pub/profiles/custom/{$name}": ["type:drupal-custom-profile"],
+            "pub/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        },
+        "patches": {
+            "drupal/core": {
+                "CKEditor Image Patch": "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch"
+            },
+            "drupal/anchor_link": {
+                "Put ckeditor anchor_link and fakeobjects libraries in place": "https://www.drupal.org/files/issues/2021-06-03/3204935-anchor_link-adjust-libraries-16.patch"
+            }
+        }
+    }
+}
