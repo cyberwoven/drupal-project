@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pushd pub;
+    ~/bin/drush cr
+    ~/bin/drush updb -y
+popd;
