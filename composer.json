@@ -96,11 +96,14 @@
         }
     },
     "scripts": {
+        "post-create-project-cmd": [
+            "bash scripts/install.sh"
+        ],
         "post-install-cmd": [
-            "cp -Rf pub/libraries/ckeditor.fakeobjects pub/libraries/fakeobjects"
+            "cd pub/libraries && rm -rf fakeobjects && ln -s ckeditor.fakeobjects fakeobjects"
         ],
         "post-update-cmd": [
-            "cp -Rf pub/libraries/ckeditor.fakeobjects pub/libraries/fakeobjects"
+            "cd pub/libraries && rm -rf fakeobjects && ln -s ckeditor.fakeobjects fakeobjects"
         ]
     },
     "extra": {
